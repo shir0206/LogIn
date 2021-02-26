@@ -1,33 +1,42 @@
 import React, { useState } from "react";
+import { ConnectDB } from "../../connectDB/ConnectDB";
 
 import "./LogIn.css";
 
 export const LogIn = (props) => {
   const [isDisplayPass, setIsDisplayPass] = useState(false);
 
+  function handleLogIn() {
+    let db = ConnectDB();
+
+    console.log("handleLogIn", db);
+  }
+
   return (
     <div className="login-container">
       <h1>Please log in</h1>
       <div>
-        <h6>Email Address:</h6>
-        <input></input>
+        <div>
+          <label htmlFor="email">Email Address:</label>
+          <input type="text" id="email" name="email"></input>
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type={isDisplayPass ? "text" : "password"}
+            name="password"
+            id="password"
+          />
+          <button
+            onClick={() => {
+              setIsDisplayPass((prevIsDisplayPass) => !prevIsDisplayPass);
+            }}
+          >
+            <i className="far fa-eye"></i>
+          </button>
+        </div>
       </div>
-      <div>
-        <h6>Password:</h6>
-        <input
-          type={isDisplayPass ? "text" : "password"}
-          name="password"
-          id="password"
-        />
-
-        <button
-          onClick={() => {
-            setIsDisplayPass(true);
-          }}
-        >
-          <i className="far fa-eye"></i>
-        </button>
-      </div>
+      <button onClick={handleLogIn}>Log in</button>
     </div>
   );
 };
