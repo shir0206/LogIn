@@ -1,11 +1,14 @@
 import "./styles.css";
-import getData from "./connectDB/ConnectDB";
 import { LogIn } from "./components/LogIn/LogIn";
+import useLogin from "./hooks/useLogin";
 
 export default function App() {
+  const state = useLogin();
+
   return (
     <div className="App">
-      <LogIn></LogIn>
+      <LogIn state={state}></LogIn>
+      {/* <UserPage state={state}></UserPage> */}
     </div>
   );
 }
