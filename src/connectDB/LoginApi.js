@@ -1,24 +1,25 @@
 import axios from "axios";
 
-const baseUrl = "https://gongfetest.firebaseio.com/.json";
+const baseUrl = "https://gongfetest.firebaseio.com";
 
 function getAllUsers() {
-  return axios.get(`${baseUrl}`, {
+  return axios.get(`${baseUrl + "/.json"}`, {
     json: true
   });
 }
 function getUsers(email, password) {
-  return axios.get(`${baseUrl}`, {
+  return axios.get(`${baseUrl + "/.json"}`, {
     json: true
   });
 }
 function getUser(email, password) {
-  return axios.get(`${baseUrl}`, {
+  return axios.get(`${baseUrl + "/.json"}`, {
     json: true
   });
 }
 function getAllSecrets() {
-  return axios.get(`${baseUrl}`, {
+  const receiptUrl = baseUrl + "/secrets.json";
+  return axios.get(`${receiptUrl}`, {
     json: true
   });
 }

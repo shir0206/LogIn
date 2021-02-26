@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./LogIn.css";
 
@@ -7,8 +8,15 @@ export const LogIn = (props) => {
   const [password, setPassword] = useState("mllv9n0x");
   const [isDisplayPass, setIsDisplayPass] = useState(false);
 
+  let history = useHistory();
+
+  const navigateToHierarchy = () => {
+    console.log("navigateToHierarchy");
+    history.push("/hierarchy");
+  };
+
   function handleLogIn() {
-    props.state.getSecrets(email, password);
+    props.state.getSecrets(email, password, navigateToHierarchy);
   }
 
   function handleEmailValue(e) {
@@ -17,6 +25,7 @@ export const LogIn = (props) => {
   function handlePasswordValue(e) {
     setPassword(e.target.value);
   }
+
   return (
     <div className="login-container">
       <h1>Please log in</h1>

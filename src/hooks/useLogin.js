@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import LoginApi from "../connectDB/LoginApi";
-import { useHistory } from "react-router-dom";
 
-export default (email, password) => {
-  // const [secrets, setSecrets] = useState([]);
+export default (email, password, navigateToHierarchy) => {
   const [error, setError] = useState(null);
-  const [currLoggedUser, setCurrLoggedUser] = useState(null);
+  const [currLoggedUserID, setCurrLoggedUserID] = useState(null);
 
-  function getSecrets(email, password) {
+  function getSecrets(email, password, navigateToHierarchy) {
     LoginApi.getAllSecrets()
       .then(function (result) {
         console.log("result=", result);
 
-        let currUserID = validateUser(result.data.secrets, email, password);
+        validateUser(result.data, email, password);
+
+        navigateToHierarchy();
       })
       .catch(function (loginError) {
         console.log("getSecretsCatch=", loginError);
@@ -28,14 +28,22 @@ export default (email, password) => {
 
     let currUserID = secrets[currSecretCode];
     console.log("currUserID=", currUserID);
-    return currUserID;
+
+    if (currUserID) {
+      setCurrLoggedUserID(currUserID);
+    }
   }
 
-  function handleUrl() {
-    let history = useHistory();
-    history.push("/hierarchy");
-  }
-
+  // function getCurrUser() {
+  //   LoginApi.getAllUsers()
+  //     .then(function (result) {
+  //       console.log("getCurrUserResult=", result);
+  //     })
+  //     .catch(function (loginError) {
+  //       console.log("getCurrUserCatch=", loginError);
+  //       setError(loginError);
+  //     });
+  // }
   function make32(s) {
     let r = s;
     while (r.length < 32) {
@@ -323,5 +331,5 @@ export default (email, password) => {
     231
   ];
 
-  return { getSecrets, error };
+  return { getSecrets, error, currLoggedUserID };
 };
