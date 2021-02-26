@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ConnectDB } from "../../connectDB/ConnectDB";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./LogIn.css";
 
@@ -7,16 +7,22 @@ export const LogIn = (props) => {
   const [isDisplayPass, setIsDisplayPass] = useState(false);
 
   function handleLogIn() {
-    let db = ConnectDB();
-
-    db.getData()
-      .then(function (result) {
-        console.log("handleLogIn", result);
-      })
-      .catch(function (error) {
-        console.log("handleLogIn", error);
-      });
+    props.state.getSecrets();
   }
+
+  // useEffect(() => {
+  //   if (props.state.secrets.length === 0) return;
+
+  //   console.log("secrets=", props.state.secrets);
+  //   isValidUser();
+  // }, [props.state.secrets]);
+
+  // function isValidUser() {
+  //   if (true) {
+  //     let history = useHistory();
+  //     history.push("/hierarchy");
+  //   }
+  // }
 
   return (
     <div className="login-container">
@@ -33,6 +39,7 @@ export const LogIn = (props) => {
             name="password"
             id="password"
           />
+          {props.state.error && <p>err</p>}
           <button
             onClick={() => {
               setIsDisplayPass((prevIsDisplayPass) => !prevIsDisplayPass);

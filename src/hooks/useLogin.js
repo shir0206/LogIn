@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import LoginApi from "../connectDB/LoginApi";
 
 export default () => {
-  const [users, setUsers] = useState([]);
+  const [secrets, setSecrets] = useState([]);
   const [error, setError] = useState(null);
+  const [isValidUser, setIsValidUser] = useState(false);
 
-  function getUsers() {
-    LoginApi.getUsers()
+  function getSecrets() {
+    LoginApi.getAllSecrets()
       .then(function (result) {
-        setUsers(result.data.users);
-        console.log("handleLogIn", result);
+        setSecrets(result.data.secrets);
+        console.log("getSecrets=", result);
       })
       .catch(function (loginError) {
-        console.log("handleLogIn", error);
+        console.log("getSecrets=", error);
         setError(loginError);
       });
   }
 
-  return { getUsers, users, error };
+  return { getSecrets, secrets, isValidUser, error };
 };

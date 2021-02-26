@@ -7,13 +7,17 @@ function getAllUsers() {
     json: true
   });
 }
-
+function getUsers(email, password) {
+  return axios.get(`${baseUrl}`, {
+    json: true
+  });
+}
 function getUser(email, password) {
   return axios.get(`${baseUrl}`, {
     json: true
   });
 }
-function getSecrets() {
+function getAllSecrets() {
   return axios.get(`${baseUrl}`, {
     json: true
   });
@@ -22,5 +26,5 @@ function getSecrets() {
 export default {
   getAllUsers,
   getUser,
-  getSecrets
+  getAllSecrets
 };
