@@ -9,7 +9,13 @@ export const LogIn = (props) => {
   function handleLogIn() {
     let db = ConnectDB();
 
-    console.log("handleLogIn", db);
+    db.getData()
+      .then(function (result) {
+        console.log("handleLogIn", result);
+      })
+      .catch(function (error) {
+        console.log("handleLogIn", error);
+      });
   }
 
   return (
