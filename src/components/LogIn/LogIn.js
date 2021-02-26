@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 import "./LogIn.css";
 
 export const LogIn = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("anthony.xiouping@xtreet.tvl");
+  const [password, setPassword] = useState("mllv9n0x");
   const [isDisplayPass, setIsDisplayPass] = useState(false);
 
   function handleLogIn() {
@@ -28,6 +27,7 @@ export const LogIn = (props) => {
             type="text"
             id="email"
             name="email"
+            value={email}
             onChange={handleEmailValue}
           ></input>
         </div>
@@ -37,6 +37,7 @@ export const LogIn = (props) => {
             type={isDisplayPass ? "text" : "password"}
             name="password"
             id="password"
+            value={password}
             onChange={handlePasswordValue}
           />
           <button
@@ -46,7 +47,7 @@ export const LogIn = (props) => {
           >
             <i className="far fa-eye"></i>
           </button>
-          {props.state.error && <p>err</p>}
+          {props.state.error && <p>Invalid Email Address or Password.</p>}
         </div>
       </div>
       <button onClick={handleLogIn}>Log in</button>
