@@ -63,8 +63,16 @@
 }
 
 .login-field-container {
-  height: 15vh;
+  height: 12vh;
 }
 .login-title {
   margin-block-end: 5vh;
+}
+
+.error-msg {
+  font-size: min(2vw, 2vh);
+  position: absolute;
+  top: 58vh;
+  left: 22.5vw;
+  transform: translate(-50%);
 }

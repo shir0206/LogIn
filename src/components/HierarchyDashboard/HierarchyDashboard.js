@@ -6,7 +6,7 @@ import { EmployeesHierarchy } from "../EmployeesHierarchy/EmployeesHierarchy";
 import "./HierarchyDashboard.css";
 
 export const HierarchyDashboard = ({ loginState }) => {
-  const [allUsers, setAllUsers] = useState([]);
+  //const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState(null);
   const [currUser, setCurrUser] = useState(null);
   const [hierarchyTreeData, setHierarchyTreeData] = useState(null);
@@ -72,7 +72,7 @@ export const HierarchyDashboard = ({ loginState }) => {
   useEffect(() => {
     LoginApi.getAllUsers()
       .then(function (result) {
-        setAllUsers(result.data);
+        //setAllUsers(result.data);
         //console.log("result=", result);
         //console.log("result.data=", result.data);
         initCurrUser(result.data);
@@ -85,7 +85,19 @@ export const HierarchyDashboard = ({ loginState }) => {
         //console.log("allUsersError=", allUsersError);
         setError(allUsersError);
       });
-  }, []);
+  });
+
+  if (error) {
+    return (
+      <div className="hierarchy-container">
+        <h4>Error loading hierarchy page.</h4>
+        <button className="login-btn" onClick={navigateToLogIn}>
+          Back
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="hierarchy-container">
       <nav className="hierarchy-nav">

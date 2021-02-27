@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./EmployeeCard.css";
+import user from "../../images/user.jpg";
+
 export const EmployeeCard = ({ employee, currUser }) => {
   const [isExtendEmployees, setIsExtendEmployees] = useState(false);
 
-  function handleExtendCollapseEmployees() {}
   return (
     <div className="employee-container">
       <div className="employee-card">
         <img
           className="employee-img"
           alt={employee.id}
-          src={employee.photo}
+          src={employee.photo ? employee.photo : user}
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src =
-              "https://www.jing.fm/clipimg/detail/384-3841744_person-generic-clipart-image-person.png";
+            e.target.src = user;
           }}
         ></img>
         <div className="employee-card-details">
           <h4 className="employee-name">
             {employee.firstName + " " + employee.lastName}
             {currUser.id === employee.id && (
-              <i className="far fa-star curr-user-icon"></i>
+              <i className="fas fa-star curr-user-icon"></i>
             )}
           </h4>
 
@@ -53,7 +53,7 @@ export const EmployeeCard = ({ employee, currUser }) => {
       {isExtendEmployees && (
         <ul className="employee-list">
           {employee.employees &&
-            employee.employees.map((employee, index) => (
+            employee.employees.map((employee) => (
               <EmployeeCard
                 key={employee.id}
                 employee={employee}

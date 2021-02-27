@@ -26,7 +26,7 @@ export const LogIn = ({ loginState }) => {
   }
 
   function handleEmailValue(e) {
-    setEmail(e.target.value);
+    setEmail(e.target.value.toLowerCase());
   }
   function handlePasswordValue(e) {
     setPassword(e.target.value);
@@ -65,10 +65,16 @@ export const LogIn = ({ loginState }) => {
             >
               <i className="far fa-eye display-passwprd-icon"></i>
             </button>
-            {areFieldsEmpty && <p>Please fill all fields.</p>}
-            {loginState.error && <p>Invalid Email Address or Password.</p>}
           </div>
         </div>
+
+        {areFieldsEmpty ? (
+          <p className="error-msg">Please fill all fields.</p>
+        ) : (
+          loginState.error && (
+            <p className="error-msg">Invalid Email Address or Password.</p>
+          )
+        )}
         <button className="login-btn" onClick={handleLogIn}>
           Log in
         </button>
