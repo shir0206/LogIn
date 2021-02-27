@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./Hierarchy.css";
 
@@ -11,10 +11,9 @@ export const Hierarchy = (props) => {
     history.push("/LogIn");
   };
 
-  function handleLogOut(navigateToLogIn) {
+  function handleLogOut() {
     if (props.state.currLoggedUserID) {
-      //props.state.logOut(navigateToLogIn);
-      // navigateToLogIn();
+      props.state.logOut(navigateToLogIn);
     }
   }
 
@@ -22,7 +21,7 @@ export const Hierarchy = (props) => {
     <div className="hierarchy-container">
       <h1>hierarchy</h1>
       <h1>{props.state.currLoggedUserID}</h1>
-      <button onClick={handleLogOut(navigateToLogIn)}>Log out</button>
+      <button onClick={handleLogOut}>Log out</button>
     </div>
   );
 };

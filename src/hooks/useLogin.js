@@ -6,6 +6,10 @@ export default (email, password, navigateToHierarchy) => {
   const [currLoggedUserID, setCurrLoggedUserID] = useState(null);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
+  function logIn(email, password, navigateToHierarchy) {
+    getSecrets(email, password, navigateToHierarchy);
+  }
+
   function getSecrets(email, password, navigateToHierarchy) {
     LoginApi.getAllSecrets()
       .then(function (result) {
@@ -73,5 +77,5 @@ export default (email, password, navigateToHierarchy) => {
     return code;
   }
 
-  return { getSecrets, logOut, error, isUserAuthenticated, currLoggedUserID };
+  return { logIn, logOut, error, isUserAuthenticated, currLoggedUserID };
 };

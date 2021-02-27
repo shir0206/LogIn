@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./LogIn.css";
@@ -19,7 +19,7 @@ export const LogIn = (props) => {
   function handleLogIn() {
     if (email && password) {
       setAreFieldsEmpty(false);
-      props.state.getSecrets(email, password, navigateToHierarchy);
+      props.state.logIn(email, password, navigateToHierarchy);
     } else {
       setAreFieldsEmpty(true);
     }
