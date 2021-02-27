@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LoginApi from "../connectDB/LoginApi";
 
-export default () => {
+export default (setAllUsersData) => {
   const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState(null);
 
@@ -9,6 +9,7 @@ export default () => {
     LoginApi.getAllUsers()
       .then(function (result) {
         setAllUsers(result.data.users);
+        setAllUsersData(result.data.users);
         console.log("useAllUsers=", result);
       })
       .catch(function (loginError) {

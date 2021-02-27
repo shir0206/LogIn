@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = "https://gongfetest.firebaseio.com";
 
 function getAllUsers() {
-  return axios.get(`${baseUrl + "/.json"}`, {
+  return axios.get(`${baseUrl + "/users.json"}`, {
     json: true
   });
 }
