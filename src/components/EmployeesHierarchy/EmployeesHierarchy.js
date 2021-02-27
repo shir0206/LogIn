@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "./EmployeesHierarchy.css";
+import React from "react";
 import { EmployeeCard } from "../EmployeeCard/EmployeeCard";
-export const EmployeesHierarchy = ({ hierarchyTreeData, currUser }) => {
+export const EmployeesHierarchy = ({ hierarchyTreeData, currentUser }) => {
   return (
     <ul className="employee-hierarchy">
-      {hierarchyTreeData &&
-        hierarchyTreeData.map((employee, index) => (
-          <EmployeeCard
-            key={employee.id}
-            employee={employee}
-            currUser={currUser}
-          ></EmployeeCard>
-        ))}
+      {hierarchyTreeData.map((employee) => (
+        <EmployeeCard
+          key={employee.id}
+          employee={employee}
+          currentUser={currentUser}
+        ></EmployeeCard>
+      ))}
     </ul>
   );
 };

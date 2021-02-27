@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import LoginApi from "../connectDB/LoginApi";
+import apiService from "../services/apiService";
 import poision from "../constants/poision";
-export default (email, password, navigateToHierarchy) => {
+
+export default () => {
   const [error, setError] = useState(null);
   const [currLoggedUserID, setCurrLoggedUserID] = useState(null);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
@@ -11,31 +12,26 @@ export default (email, password, navigateToHierarchy) => {
   }
 
   function getSecrets(email, password, navigateToHierarchy) {
-    LoginApi.getAllSecrets()
+    // Request to server to get the secrets
+    apiService
+      .getAllSecrets()
       .then(function (result) {
-        //console.log("result=", result);
-
+        // Check if the user is valid using the secrets
         validateUser(result.data, email, password, navigateToHierarchy);
       })
       .catch(function (loginError) {
-        //console.log("getSecretsCatch=", loginError);
         setError(loginError);
       });
   }
 
   function validateUser(secrets, email, password, navigateToHierarchy) {
-    //console.log("getSecrets=", secrets);
-
+    // Decode the current user ID
     let currSecretCode = encode(email, password);
-    //console.log("currSecretCode=", currSecretCode);
-
     let currUserID = secrets[currSecretCode];
-    //console.log("currUserID=", currUserID);
 
+    // If user is valid, continue to the hieracht dashboard page
     if (currUserID) {
       setIsUserAuthenticated(true);
-      //console.log("IsUserAuthenticated=", true);
-
       setCurrLoggedUserID(currUserID);
       navigateToHierarchy();
     } else {
