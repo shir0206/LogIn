@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import LoginApi from "../../connectDB/LoginApi";
+import { EmployeesHierarchy } from "../EmployeesHierarchy/EmployeesHierarchy";
 
 import "./Hierarchy.css";
 
@@ -8,6 +9,8 @@ export const Hierarchy = ({ loginState }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState(null);
   const [currUser, setCurrUser] = useState(null);
+  const [hierarchyTreeData, setHierarchyTreeData] = useState(null);
+
   let history = useHistory();
 
   const navigateToLogIn = () => {
@@ -73,7 +76,10 @@ export const Hierarchy = ({ loginState }) => {
         console.log("result=", result);
         console.log("result.data=", result.data);
         initCurrUser(result.data);
-        console.log("list_to_tree=", buildHierarchyTree(result.data));
+
+        let hierarchyTree = buildHierarchyTree(result.data);
+        console.log("list_to_tree=", hierarchyTree);
+        setHierarchyTreeData(hierarchyTree);
       })
       .catch(function (allUsersError) {
         console.log("allUsersError=", allUsersError);
@@ -90,6 +96,9 @@ export const Hierarchy = ({ loginState }) => {
         </h4>
       )}
       <button onClick={handleLogOut}>Log out</button>
+      {hierarchyTreeData && (
+        <EmployeesHierarchy hierarchyTreeData={hierarchyTreeData} />
+      )}
     </div>
   );
 };
