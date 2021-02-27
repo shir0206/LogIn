@@ -1,12 +1,14 @@
 .employee-card {
-  width: min(50vw, 50vh);
+  width: min(65vw, 65vh);
   height: min(30vw, 30vh);
   display: block;
   object-fit: cover;
-  border: 2px solid purple;
-  border-radius: 10%;
   margin: min(2vw, 2vh);
   display: flex;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px var(--basic-color);
+  background: #fff;
+  border-radius: 15px;
 }
 
 .employee-img {
@@ -16,8 +18,35 @@
   object-fit: cover;
 }
 
+.employee-card-details {
+  width: min(40vw, 40vh);
+  padding: min(0.2vw, 0.2vh);
+  text-align: start;
+}
 .employee-name {
-  width: min(30vw, 30vh);
-  height: 100%;
-  margin: min(2vw, 2vh) 0 0 min(2vw, 2vh);
+  width: 100%;
+  height: min(10vw, 10vh);
+  margin: min(3vw, 3vh) 0 0 min(2vw, 2vh);
+  font-weight: normal;
+  color: var(--default-color);
+  font-size: min(3vw, 3vh);
+}
+
+.employee-email {
+  width: 100%;
+  height: min(10vw, 10vh);
+  margin: min(3vw, 3vh) 0 0 min(2vw, 2vh);
+  font-weight: normal;
+  color: var(--basic-color);
+  font-size: min(2vw, 2vh);
+}
+.email-icon {
+  color: var(--accent-color);
+  margin: min(0.5vw, 0.5vw);
+}
+
+.curr-user-icon {
+  color: var(--accent-color);
+  font-size: min(2vw, 2vh);
+  margin: min(0.5vw, 0.5vw);
 }

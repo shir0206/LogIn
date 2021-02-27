@@ -1,4 +1,12 @@
-.App {
-  font-family: sans-serif;
+body {
   text-align: center;
+  font-family: "Ubuntu Condensed", sans-serif;
+  background: var(--background-color);
+}
+:root {
+  --background-accent-color: rgb(50, 21, 89);
+  --background-color: rgb(247, 247, 247);
+  --basic-color: rgb(127, 127, 127);
+  --default-color: rgb(64, 42, 155);
+  --accent-color: rgb(251, 50, 84);
 }

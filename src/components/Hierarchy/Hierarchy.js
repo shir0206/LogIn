@@ -97,7 +97,10 @@ export const Hierarchy = ({ loginState }) => {
       )}
       <button onClick={handleLogOut}>Log out</button>
       {hierarchyTreeData && (
-        <EmployeesHierarchy hierarchyTreeData={hierarchyTreeData} />
+        <EmployeesHierarchy
+          hierarchyTreeData={hierarchyTreeData}
+          currUser={currUser}
+        />
       )}
     </div>
   );
