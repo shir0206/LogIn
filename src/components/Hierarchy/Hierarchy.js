@@ -14,7 +14,7 @@ export const Hierarchy = ({ loginState }) => {
   let history = useHistory();
 
   const navigateToLogIn = () => {
-    console.log("navigateToLogIn");
+    //console.log("navigateToLogIn");
     history.push("/LogIn");
   };
 
@@ -29,17 +29,17 @@ export const Hierarchy = ({ loginState }) => {
   }
 
   function initCurrUser(users) {
-    console.log(users);
+    //console.log(users);
     const currUserID = loginState.currLoggedUserID;
     const currUserObj = users.filter((user) => user.id === currUserID);
     if (currUserObj.length > 0) {
       setCurrUser(currUserObj[0]);
-      console.log(currUserObj[0]);
+      //console.log(currUserObj[0]);
     }
   }
 
   function buildHierarchyTree(empList) {
-    console.log("empList=", empList);
+    //console.log("empList=", empList);
 
     let map = {};
     let node;
@@ -73,16 +73,16 @@ export const Hierarchy = ({ loginState }) => {
     LoginApi.getAllUsers()
       .then(function (result) {
         setAllUsers(result.data);
-        console.log("result=", result);
-        console.log("result.data=", result.data);
+        //console.log("result=", result);
+        //console.log("result.data=", result.data);
         initCurrUser(result.data);
 
         let hierarchyTree = buildHierarchyTree(result.data);
-        console.log("list_to_tree=", hierarchyTree);
+        //console.log("list_to_tree=", hierarchyTree);
         setHierarchyTreeData(hierarchyTree);
       })
       .catch(function (allUsersError) {
-        console.log("allUsersError=", allUsersError);
+        //console.log("allUsersError=", allUsersError);
         setError(allUsersError);
       });
   }, []);

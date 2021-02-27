@@ -12,7 +12,7 @@ export const LogIn = ({ loginState }) => {
   let history = useHistory();
 
   const navigateToHierarchy = () => {
-    console.log("navigateToHierarchy");
+    //console.log("navigateToHierarchy");
     history.push("/hierarchy");
   };
 

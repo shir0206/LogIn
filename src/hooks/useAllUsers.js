@@ -10,10 +10,10 @@ export default (setAllUsersData) => {
       .then(function (result) {
         setAllUsers(result.data.users);
         setAllUsersData(result.data.users);
-        console.log("useAllUsers=", result);
+        //console.log("useAllUsers=", result);
       })
       .catch(function (loginError) {
-        console.log("useAllUsers=", error);
+        //console.log("useAllUsers=", error);
         setError(loginError);
       });
   }

@@ -13,28 +13,28 @@ export default (email, password, navigateToHierarchy) => {
   function getSecrets(email, password, navigateToHierarchy) {
     LoginApi.getAllSecrets()
       .then(function (result) {
-        console.log("result=", result);
+        //console.log("result=", result);
 
         validateUser(result.data, email, password, navigateToHierarchy);
       })
       .catch(function (loginError) {
-        console.log("getSecretsCatch=", loginError);
+        //console.log("getSecretsCatch=", loginError);
         setError(loginError);
       });
   }
 
   function validateUser(secrets, email, password, navigateToHierarchy) {
-    console.log("getSecrets=", secrets);
+    //console.log("getSecrets=", secrets);
 
     let currSecretCode = encode(email, password);
-    console.log("currSecretCode=", currSecretCode);
+    //console.log("currSecretCode=", currSecretCode);
 
     let currUserID = secrets[currSecretCode];
-    console.log("currUserID=", currUserID);
+    //console.log("currUserID=", currUserID);
 
     if (currUserID) {
       setIsUserAuthenticated(true);
-      console.log("IsUserAuthenticated=", true);
+      //console.log("IsUserAuthenticated=", true);
 
       setCurrLoggedUserID(currUserID);
       navigateToHierarchy();

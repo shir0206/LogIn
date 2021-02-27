@@ -1,0 +1,23 @@
+.employee-card {
+  width: min(50vw, 50vh);
+  height: min(30vw, 30vh);
+  display: block;
+  object-fit: cover;
+  border: 2px solid purple;
+  border-radius: 10%;
+  margin: min(2vw, 2vh);
+  display: flex;
+}
+
+.employee-img {
+  width: min(20vw, 20vh);
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.employee-name {
+  width: min(30vw, 30vh);
+  height: 100%;
+  margin: min(2vw, 2vh) 0 0 min(2vw, 2vh);
+}

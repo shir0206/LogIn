@@ -9,7 +9,13 @@ export const EmployeeCard = ({ employee }) => {
           className="employee-img"
           alt={employee.id}
           src={employee.photo}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://www.jing.fm/clipimg/detail/384-3841744_person-generic-clipart-image-person.png";
+          }}
         ></img>
+
         <h4 className="employee-name">
           {employee.firstName + " " + employee.lastName}
         </h4>
@@ -18,7 +24,7 @@ export const EmployeeCard = ({ employee }) => {
       <ul className="employee-list">
         {employee.employees &&
           employee.employees.map((employee, index) => (
-            <EmployeeCard employee={employee}></EmployeeCard>
+            <EmployeeCard key={employee.id} employee={employee}></EmployeeCard>
           ))}
       </ul>
     </div>

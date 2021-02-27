@@ -6,7 +6,7 @@ export const EmployeesHierarchy = ({ hierarchyTreeData }) => {
     <ul className="employee-hierarchy">
       {hierarchyTreeData &&
         hierarchyTreeData.map((employee, index) => (
-          <EmployeeCard employee={employee}></EmployeeCard>
+          <EmployeeCard key={employee.id} employee={employee}></EmployeeCard>
         ))}
     </ul>
   );
