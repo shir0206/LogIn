@@ -3,6 +3,8 @@
   height: min(7vw, 7vh);
   font-size: min(5vw, 5vh);
   background: var(--background-accent-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 .hierarchy-nav-greeting {
@@ -14,4 +16,20 @@
   width: fit-content;
   height: 100%;
   line-height: min(7vw, 7vh);
+}
+
+.logout-btn {
+  font-weight: normal;
+  color: white;
+  font-size: min(2vw, 2vh);
+  height: 100%;
+  line-height: min(7vw, 7vh);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.logout-icon {
+  color: var(--accent-color);
+  margin: min(0.5vw, 0.5vw);
 }

@@ -94,11 +94,14 @@ export const HierarchyDashboard = ({ loginState }) => {
             {"Hello, " + currUser.firstName + " " + currUser.lastName + "!"}
           </h4>
         )}
+
+        <button onClick={handleLogOut} className="logout-btn">
+          Log out <i className="fas fa-sign-out-alt logout-icon"></i>
+        </button>
       </nav>
       <h1>hierarchy</h1>
       <h1>{loginState.currLoggedUserID}</h1>
 
-      <button onClick={handleLogOut}>Log out</button>
       {hierarchyTreeData && (
         <EmployeesHierarchy
           hierarchyTreeData={hierarchyTreeData}
