@@ -1,0 +1,70 @@
+.login-container {
+  width: 65vw;
+  height: 65vh;
+  display: block;
+  object-fit: cover;
+  margin: min(2vw, 2vh);
+  display: flex;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px var(--basic-color);
+  background: #fff;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-decoration {
+  width: 20vw;
+  height: 100%;
+  background: var(--background-accent-color);
+}
+.login-form {
+  width: 45vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-btn {
+  background: var(--accent-color);
+  border: none;
+  outline: none;
+  font-size: min(4vw, 4vh);
+  padding: min(1vw, 1vh) min(2vw, 2vh);
+  border-radius: 50px;
+  width: 80%;
+  margin: 0 10%;
+}
+
+.display-passwprd-icon {
+  color: var(--background-accent-color);
+  margin: min(0.5vw, 0.5vw);
+  font-size: min(3vw, 3vh);
+  transform: translate(16.5vw, max(-4.5vw, -4.5vh));
+}
+
+.login-input {
+  width: 35vw;
+  margin: 0 5vw;
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--basic-color);
+  display: block;
+  font-size: min(3vw, 3vh);
+  text-align: center;
+}
+
+.login-input:focus {
+  border-bottom: 2px solid var(--background-accent-color);
+  outline: none;
+}
+
+.login-field-container {
+  height: 15vh;
+}
+.login-title {
+  margin-block-end: 5vh;
+}

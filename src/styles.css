@@ -3,7 +3,22 @@ body {
   font-family: "Ubuntu Condensed", sans-serif;
   background: var(--background-color);
   margin: 0;
+  color: var(--basic-color);
 }
+button,
+input {
+  font-family: "Ubuntu Condensed", sans-serif;
+  background: none;
+  border: none;
+  outline: none;
+}
+button {
+  cursor: pointer;
+}
+h1 {
+  color: #000;
+}
+
 :root {
   --background-accent-color: rgb(50, 21, 89);
   --background-color: rgb(247, 247, 247);

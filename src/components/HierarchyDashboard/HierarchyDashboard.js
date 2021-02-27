@@ -99,8 +99,7 @@ export const HierarchyDashboard = ({ loginState }) => {
           Log out <i className="fas fa-sign-out-alt logout-icon"></i>
         </button>
       </nav>
-      <h1>hierarchy</h1>
-      <h1>{loginState.currLoggedUserID}</h1>
+      <h1>Hierarchy</h1>
 
       {hierarchyTreeData && (
         <EmployeesHierarchy

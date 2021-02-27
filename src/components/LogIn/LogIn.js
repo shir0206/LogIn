@@ -34,39 +34,46 @@ export const LogIn = ({ loginState }) => {
 
   return (
     <div className="login-container">
-      <h1>Please log in</h1>
-      <div>
+      <div className="login-form">
+        <h1 className="login-title">Please log in</h1>
         <div>
-          <label htmlFor="email">Email Address:</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleEmailValue}
-          ></input>
+          <div className="login-field-container">
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleEmailValue}
+              className="login-input"
+            ></input>
+          </div>
+          <div className="login-field-container">
+            <label htmlFor="password">Password</label>
+            <input
+              type={isDisplayPass ? "text" : "password"}
+              name="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordValue}
+              className="login-input"
+            />
+            <button
+              onClick={() => {
+                setIsDisplayPass((prevIsDisplayPass) => !prevIsDisplayPass);
+              }}
+            >
+              <i className="far fa-eye display-passwprd-icon"></i>
+            </button>
+            {areFieldsEmpty && <p>Please fill all fields.</p>}
+            {loginState.error && <p>Invalid Email Address or Password.</p>}
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type={isDisplayPass ? "text" : "password"}
-            name="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordValue}
-          />
-          <button
-            onClick={() => {
-              setIsDisplayPass((prevIsDisplayPass) => !prevIsDisplayPass);
-            }}
-          >
-            <i className="far fa-eye"></i>
-          </button>
-          {areFieldsEmpty && <p>Please fill all fields.</p>}
-          {loginState.error && <p>Invalid Email Address or Password.</p>}
-        </div>
+        <button className="login-btn" onClick={handleLogIn}>
+          Log in
+        </button>
       </div>
-      <button onClick={handleLogIn}>Log in</button>
+      <div className="login-decoration"></div>
     </div>
   );
 };
