@@ -1,6 +1,6 @@
 import "./styles.css";
 import { LogIn } from "./components/LogIn/LogIn";
-import { Hierarchy } from "./components/Hierarchy/Hierarchy";
+import { HierarchyDashboard } from "./components/HierarchyDashboard/HierarchyDashboard";
 import useLogin from "./hooks/useLogin";
 import {
   BrowserRouter as Router,
@@ -43,7 +43,9 @@ export default function App() {
         <Route
           exact
           path="/hierarchy"
-          render={() => <Hierarchy loginState={loginState}></Hierarchy>}
+          render={() => (
+            <HierarchyDashboard loginState={loginState}></HierarchyDashboard>
+          )}
         />
       </Switch>
     </Router>

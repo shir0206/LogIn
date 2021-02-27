@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import LoginApi from "../../connectDB/LoginApi";
 import { EmployeesHierarchy } from "../EmployeesHierarchy/EmployeesHierarchy";
 
-import "./Hierarchy.css";
+import "./HierarchyDashboard.css";
 
-export const Hierarchy = ({ loginState }) => {
+export const HierarchyDashboard = ({ loginState }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState(null);
   const [currUser, setCurrUser] = useState(null);
@@ -88,13 +88,16 @@ export const Hierarchy = ({ loginState }) => {
   }, []);
   return (
     <div className="hierarchy-container">
+      <nav className="hierarchy-nav">
+        {currUser && (
+          <h4 className="hierarchy-nav-greeting">
+            {"Hello, " + currUser.firstName + " " + currUser.lastName + "!"}
+          </h4>
+        )}
+      </nav>
       <h1>hierarchy</h1>
       <h1>{loginState.currLoggedUserID}</h1>
-      {currUser && (
-        <h4>
-          {"Hello, " + currUser.firstName + " " + currUser.lastName + "!"}
-        </h4>
-      )}
+
       <button onClick={handleLogOut}>Log out</button>
       {hierarchyTreeData && (
         <EmployeesHierarchy
