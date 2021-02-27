@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 export default function App() {
-  const state = useLogin();
+  const loginState = useLogin();
 
   return (
     <Router>
@@ -26,7 +26,7 @@ export default function App() {
           exact
           path="/"
           render={() => {
-            return state.isUserAuthenticated ? (
+            return loginState.isUserAuthenticated ? (
               <Redirect to="/hierarchy" />
             ) : (
               <Redirect to="/login" />
@@ -37,13 +37,13 @@ export default function App() {
         <Route
           exact
           path="/login"
-          render={() => <LogIn state={state}></LogIn>}
+          render={() => <LogIn loginState={loginState}></LogIn>}
         />
 
         <Route
           exact
           path="/hierarchy"
-          render={() => <Hierarchy state={state}></Hierarchy>}
+          render={() => <Hierarchy loginState={loginState}></Hierarchy>}
         />
       </Switch>
     </Router>

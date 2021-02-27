@@ -7,11 +7,7 @@ function getAllUsers() {
     json: true
   });
 }
-function getUsers(email, password) {
-  return axios.get(`${baseUrl + "/.json"}`, {
-    json: true
-  });
-}
+
 function getUser(email, password) {
   return axios.get(`${baseUrl + "/.json"}`, {
     json: true

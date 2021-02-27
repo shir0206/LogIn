@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import "./LogIn.css";
 
-export const LogIn = (props) => {
+export const LogIn = ({ loginState }) => {
   const [email, setEmail] = useState("anthony.xiouping@xtreet.tvl");
   const [password, setPassword] = useState("mllv9n0x");
   const [isDisplayPass, setIsDisplayPass] = useState(false);
@@ -19,7 +19,7 @@ export const LogIn = (props) => {
   function handleLogIn() {
     if (email && password) {
       setAreFieldsEmpty(false);
-      props.state.logIn(email, password, navigateToHierarchy);
+      loginState.logIn(email, password, navigateToHierarchy);
     } else {
       setAreFieldsEmpty(true);
     }
@@ -63,7 +63,7 @@ export const LogIn = (props) => {
             <i className="far fa-eye"></i>
           </button>
           {areFieldsEmpty && <p>Please fill all fields.</p>}
-          {props.state.error && <p>Invalid Email Address or Password.</p>}
+          {loginState.error && <p>Invalid Email Address or Password.</p>}
         </div>
       </div>
       <button onClick={handleLogIn}>Log in</button>
