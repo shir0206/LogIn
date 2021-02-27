@@ -2,7 +2,13 @@ import "./styles.css";
 import { LogIn } from "./components/LogIn/LogIn";
 import { Hierarchy } from "./components/Hierarchy/Hierarchy";
 import useLogin from "./hooks/useLogin";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+  Redirect
+} from "react-router-dom";
 
 export default function App() {
   const state = useLogin();
@@ -15,13 +21,31 @@ export default function App() {
         className="btn"
       ></NavLink>
 
-      <Route exact path="" render={() => <LogIn state={state}></LogIn>} />
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return state.isUserAuthenticated ? (
+              <Redirect to="/hierarchy" />
+            ) : (
+              <Redirect to="/login" />
+            );
+          }}
+        />
 
-      <Route
-        exact
-        path="/hierarchy"
-        render={() => <Hierarchy state={state}></Hierarchy>}
-      />
+        <Route
+          exact
+          path="/login"
+          render={() => <LogIn state={state}></LogIn>}
+        />
+
+        <Route
+          exact
+          path="/hierarchy"
+          render={() => <Hierarchy state={state}></Hierarchy>}
+        />
+      </Switch>
     </Router>
   );
 }

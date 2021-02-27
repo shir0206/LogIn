@@ -4,15 +4,14 @@ import LoginApi from "../connectDB/LoginApi";
 export default (email, password, navigateToHierarchy) => {
   const [error, setError] = useState(null);
   const [currLoggedUserID, setCurrLoggedUserID] = useState(null);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   function getSecrets(email, password, navigateToHierarchy) {
     LoginApi.getAllSecrets()
       .then(function (result) {
         console.log("result=", result);
 
-        validateUser(result.data, email, password);
-
-        navigateToHierarchy();
+        validateUser(result.data, email, password, navigateToHierarchy);
       })
       .catch(function (loginError) {
         console.log("getSecretsCatch=", loginError);
@@ -20,7 +19,7 @@ export default (email, password, navigateToHierarchy) => {
       });
   }
 
-  function validateUser(secrets, email, password) {
+  function validateUser(secrets, email, password, navigateToHierarchy) {
     console.log("getSecrets=", secrets);
 
     let currSecretCode = encode(email, password);
@@ -30,20 +29,16 @@ export default (email, password, navigateToHierarchy) => {
     console.log("currUserID=", currUserID);
 
     if (currUserID) {
+      setIsUserAuthenticated(true);
+      console.log("IsUserAuthenticated=", true);
+
       setCurrLoggedUserID(currUserID);
+      navigateToHierarchy();
+    } else {
+      setError("Invalid Email Address or Password");
     }
   }
 
-  // function getCurrUser() {
-  //   LoginApi.getAllUsers()
-  //     .then(function (result) {
-  //       console.log("getCurrUserResult=", result);
-  //     })
-  //     .catch(function (loginError) {
-  //       console.log("getCurrUserCatch=", loginError);
-  //       setError(loginError);
-  //     });
-  // }
   function make32(s) {
     let r = s;
     while (r.length < 32) {
@@ -331,5 +326,5 @@ export default (email, password, navigateToHierarchy) => {
     231
   ];
 
-  return { getSecrets, error, currLoggedUserID };
+  return { getSecrets, error, isUserAuthenticated, currLoggedUserID };
 };

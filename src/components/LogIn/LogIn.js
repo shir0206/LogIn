@@ -7,6 +7,7 @@ export const LogIn = (props) => {
   const [email, setEmail] = useState("anthony.xiouping@xtreet.tvl");
   const [password, setPassword] = useState("mllv9n0x");
   const [isDisplayPass, setIsDisplayPass] = useState(false);
+  const [areFieldsEmpty, setAreFieldsEmpty] = useState();
 
   let history = useHistory();
 
@@ -16,7 +17,12 @@ export const LogIn = (props) => {
   };
 
   function handleLogIn() {
-    props.state.getSecrets(email, password, navigateToHierarchy);
+    if (email && password) {
+      setAreFieldsEmpty(false);
+      props.state.getSecrets(email, password, navigateToHierarchy);
+    } else {
+      setAreFieldsEmpty(true);
+    }
   }
 
   function handleEmailValue(e) {
@@ -56,6 +62,7 @@ export const LogIn = (props) => {
           >
             <i className="far fa-eye"></i>
           </button>
+          {areFieldsEmpty && <p>Please fill all fields.</p>}
           {props.state.error && <p>Invalid Email Address or Password.</p>}
         </div>
       </div>
