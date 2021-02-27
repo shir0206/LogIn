@@ -25,20 +25,6 @@ export const Hierarchy = ({ loginState }) => {
     }
   }
 
-  useEffect(() => {
-    LoginApi.getAllUsers()
-      .then(function (result) {
-        setAllUsers(result.data);
-        console.log("useAllUsers8=", result);
-        console.log("useAllUsers8=", result.data);
-        initCurrUser(result.data);
-      })
-      .catch(function (allUsersError) {
-        console.log("useAllUsers8=", allUsersError);
-        setError(allUsersError);
-      });
-  }, []);
-
   function initCurrUser(users) {
     console.log(users);
     const currUserID = loginState.currLoggedUserID;
@@ -49,6 +35,51 @@ export const Hierarchy = ({ loginState }) => {
     }
   }
 
+  function buildHierarchyTree(empList) {
+    console.log("empList=", empList);
+
+    let map = {};
+    let node;
+    let hierarchyTree = [];
+    let i;
+
+    //Prepare data
+    for (i = 0; i < empList.length; i++) {
+      //Init map Key=ID, Value=index of empList
+      map[empList[i].id] = i;
+      //Init employee array to each employee
+      empList[i].employees = [];
+    }
+
+    //Create tree
+    for (i = 0; i < empList.length; i++) {
+      node = empList[i];
+
+      if (node.managerId) {
+        // Insert employee to relevant manager
+        empList[map[node.managerId]].employees.push(node);
+      } else {
+        // Set employee as prime manager
+        hierarchyTree.push(node);
+      }
+    }
+    return hierarchyTree;
+  }
+
+  useEffect(() => {
+    LoginApi.getAllUsers()
+      .then(function (result) {
+        setAllUsers(result.data);
+        console.log("result=", result);
+        console.log("result.data=", result.data);
+        initCurrUser(result.data);
+        console.log("list_to_tree=", buildHierarchyTree(result.data));
+      })
+      .catch(function (allUsersError) {
+        console.log("allUsersError=", allUsersError);
+        setError(allUsersError);
+      });
+  }, []);
   return (
     <div className="hierarchy-container">
       <h1>hierarchy</h1>
