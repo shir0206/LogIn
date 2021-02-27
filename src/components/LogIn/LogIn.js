@@ -4,33 +4,32 @@ import { useHistory } from "react-router-dom";
 import "./LogIn.css";
 
 export const LogIn = ({ loginState }) => {
-  const [email, setEmail] = useState("anthony.xiouping@xtreet.tvl");
-  const [password, setPassword] = useState("mllv9n0x");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isDisplayPass, setIsDisplayPass] = useState(false);
   const [areFieldsEmpty, setAreFieldsEmpty] = useState();
 
   let history = useHistory();
 
   const navigateToHierarchy = () => {
-    //console.log("navigateToHierarchy");
     history.push("/hierarchy");
   };
 
-  function handleLogIn() {
+  const handleLogIn = () => {
     if (email && password) {
       setAreFieldsEmpty(false);
       loginState.logIn(email, password, navigateToHierarchy);
     } else {
       setAreFieldsEmpty(true);
     }
-  }
+  };
 
-  function handleEmailValue(e) {
+  const handleEmailValue = (e) => {
     setEmail(e.target.value.toLowerCase());
-  }
-  function handlePasswordValue(e) {
+  };
+  const handlePasswordValue = (e) => {
     setPassword(e.target.value);
-  }
+  };
 
   return (
     <div className="login-container">

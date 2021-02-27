@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import LoginApi from "../../connectDB/LoginApi";
+import { useHistory, Redirect } from "react-router-dom";
+import apiService from "../../services/apiService";
 import { EmployeesHierarchy } from "../EmployeesHierarchy/EmployeesHierarchy";
 
 import "./HierarchyDashboard.css";
 
 export const HierarchyDashboard = ({ loginState }) => {
-  //const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState(null);
-  const [currUser, setCurrUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [hierarchyTreeData, setHierarchyTreeData] = useState(null);
 
   let history = useHistory();
 
   const navigateToLogIn = () => {
-    //console.log("navigateToLogIn");
     history.push("/LogIn");
   };
-
-  if (!loginState.currLoggedUserID) {
-    navigateToLogIn();
-  }
 
   function handleLogOut() {
     if (loginState.currLoggedUserID) {
@@ -29,27 +23,24 @@ export const HierarchyDashboard = ({ loginState }) => {
   }
 
   function initCurrUser(users) {
-    //console.log(users);
     const currUserID = loginState.currLoggedUserID;
-    const currUserObj = users.filter((user) => user.id === currUserID);
-    if (currUserObj.length > 0) {
-      setCurrUser(currUserObj[0]);
-      //console.log(currUserObj[0]);
+    const newCurrentUser = users.find((user) => user.id === currUserID);
+    if (newCurrentUser) {
+      setCurrentUser(newCurrentUser);
     }
   }
 
-  function buildHierarchyTree(empList) {
-    //console.log("empList=", empList);
-
-    let map = {};
+  // function buildHierarchyTree(empList) {
+  const buildHierarchyTree = (empList) => {
+    let empMap = {};
     let node;
     let hierarchyTree = [];
     let i;
 
     //Prepare data
     for (i = 0; i < empList.length; i++) {
-      //Init map Key=ID, Value=index of empList
-      map[empList[i].id] = i;
+      //Init map: Key=ID, Value=index of empList
+      empMap[empList[i].id] = i;
       //Init employee array to each employee
       empList[i].employees = [];
     }
@@ -57,36 +48,37 @@ export const HierarchyDashboard = ({ loginState }) => {
     //Create tree
     for (i = 0; i < empList.length; i++) {
       node = empList[i];
-
       if (node.managerId) {
         // Insert employee to relevant manager
-        empList[map[node.managerId]].employees.push(node);
+        empList[empMap[node.managerId]].employees.push(node);
       } else {
         // Set employee as prime manager
         hierarchyTree.push(node);
       }
     }
     return hierarchyTree;
-  }
+  };
 
   useEffect(() => {
-    LoginApi.getAllUsers()
+    apiService
+      .getAllUsers()
       .then(function (result) {
-        //setAllUsers(result.data);
-        //console.log("result=", result);
-        //console.log("result.data=", result.data);
         initCurrUser(result.data);
 
         let hierarchyTree = buildHierarchyTree(result.data);
-        //console.log("list_to_tree=", hierarchyTree);
         setHierarchyTreeData(hierarchyTree);
       })
       .catch(function (allUsersError) {
-        //console.log("allUsersError=", allUsersError);
         setError(allUsersError);
       });
   });
 
+  // Avoid entering a direct link
+  if (!loginState.currLoggedUserID) {
+    return <Redirect to="/" />;
+  }
+
+  // Handle error on load all users
   if (error) {
     return (
       <div className="hierarchy-container">
@@ -101,9 +93,13 @@ export const HierarchyDashboard = ({ loginState }) => {
   return (
     <div className="hierarchy-container">
       <nav className="hierarchy-nav">
-        {currUser && (
+        {currentUser && (
           <h4 className="hierarchy-nav-greeting">
-            {"Hello, " + currUser.firstName + " " + currUser.lastName + "!"}
+            {"Hello, " +
+              currentUser.firstName +
+              " " +
+              currentUser.lastName +
+              "!"}
           </h4>
         )}
 
@@ -116,7 +112,7 @@ export const HierarchyDashboard = ({ loginState }) => {
       {hierarchyTreeData && (
         <EmployeesHierarchy
           hierarchyTreeData={hierarchyTreeData}
-          currUser={currUser}
+          currentUser={currentUser}
         />
       )}
     </div>

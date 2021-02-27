@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./EmployeeCard.css";
 import user from "../../images/user.jpg";
 
-export const EmployeeCard = ({ employee, currUser }) => {
-  const [isExtendEmployees, setIsExtendEmployees] = useState(false);
+export const EmployeeCard = ({ employee, currentUser }) => {
+  const [isCardExpanded, setIsCardExpanded] = useState(false);
 
   return (
     <div className="employee-container">
@@ -20,7 +20,7 @@ export const EmployeeCard = ({ employee, currUser }) => {
         <div className="employee-card-details">
           <h4 className="employee-name">
             {employee.firstName + " " + employee.lastName}
-            {currUser.id === employee.id && (
+            {currentUser.id === employee.id && (
               <i className="fas fa-star curr-user-icon"></i>
             )}
           </h4>
@@ -33,14 +33,12 @@ export const EmployeeCard = ({ employee, currUser }) => {
             <button
               className="display-employees-btn"
               onClick={() => {
-                setIsExtendEmployees(
-                  (prevIsExtendEmployees) => !prevIsExtendEmployees
-                );
+                setIsCardExpanded((prevIsCardExpanded) => !prevIsCardExpanded);
               }}
             >
               <i
                 className={
-                  isExtendEmployees
+                  isCardExpanded
                     ? "fas fa-chevron-circle-down display-emp-icon"
                     : "fas fa-chevron-circle-up display-emp-icon"
                 }
@@ -50,14 +48,14 @@ export const EmployeeCard = ({ employee, currUser }) => {
         </div>
       </div>
 
-      {isExtendEmployees && (
+      {isCardExpanded && (
         <ul className="employee-list">
           {employee.employees &&
             employee.employees.map((employee) => (
               <EmployeeCard
                 key={employee.id}
                 employee={employee}
-                currUser={currUser}
+                currentUser={currentUser}
               ></EmployeeCard>
             ))}
         </ul>

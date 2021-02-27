@@ -7,11 +7,11 @@ export default () => {
   const [currLoggedUserID, setCurrLoggedUserID] = useState(null);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
-  function logIn(email, password, navigateToHierarchy) {
+  const logIn = (email, password, navigateToHierarchy) => {
     getSecrets(email, password, navigateToHierarchy);
-  }
+  };
 
-  function getSecrets(email, password, navigateToHierarchy) {
+  const getSecrets = (email, password, navigateToHierarchy) => {
     // Request to server to get the secrets
     apiService
       .getAllSecrets()
@@ -22,9 +22,9 @@ export default () => {
       .catch(function (loginError) {
         setError(loginError);
       });
-  }
+  };
 
-  function validateUser(secrets, email, password, navigateToHierarchy) {
+  const validateUser = (secrets, email, password, navigateToHierarchy) => {
     // Decode the current user ID
     let currSecretCode = encode(email, password);
     let currUserID = secrets[currSecretCode];
@@ -37,15 +37,15 @@ export default () => {
     } else {
       setError("Invalid Email Address or Password");
     }
-  }
+  };
 
-  function logOut(navigateToLogIn) {
+  const logOut = (navigateToLogIn) => {
     setCurrLoggedUserID(null);
     setIsUserAuthenticated(false);
     navigateToLogIn();
-  }
+  };
 
-  function make32(s) {
+  const make32 = (s) => {
     let r = s;
     while (r.length < 32) {
       r += s;
@@ -57,9 +57,8 @@ export default () => {
       ret.push(r.charCodeAt(i));
     }
     return ret;
-  }
-
-  function encode(email, password) {
+  };
+  const encode = (email, password) => {
     let e = make32(email);
     let p = make32(password);
     let code = "";
@@ -71,7 +70,7 @@ export default () => {
     }
 
     return code;
-  }
+  };
 
   return { logIn, logOut, error, isUserAuthenticated, currLoggedUserID };
 };
